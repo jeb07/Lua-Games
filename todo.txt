@@ -1,0 +1,3 @@
+shooting gallery - targets are pumpkins that explode 
+zombie shooter - spacebar alongwith mousedown
+platformer - to actually work

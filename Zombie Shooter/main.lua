@@ -100,6 +100,8 @@ function love.draw()
     love.graphics.print("Score: ".. score, 225)
     love.graphics.print("Time: " .. math.ceil(gameTimer), 450)
 
+    love.graphics.printf("Press Enter or click to fire", 0, 100, 100, 'center')
+
     if gameState == 1 then
         love.graphics.printf("Click anywhere to begin!", 0, love.graphics.getHeight() / 2, love.graphics.getWidth(),
             "center")
@@ -125,6 +127,9 @@ end
 function love.keypressed(key)
     if key == "space" then
         spawnZombie()
+    end
+    if key == "enter" or key == "return" then 
+        spawnBullet()
     end
 end
 

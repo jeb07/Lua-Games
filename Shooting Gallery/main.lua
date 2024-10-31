@@ -7,13 +7,18 @@ function love.load()
     score = 0
     timer = 0
     gameState = 1
+    explodedX = -100
+    explodedY = -100
 
     gameFont = love.graphics.newFont(40)
 
     sprites = {}
     sprites.sky = love.graphics.newImage('sprites/sky.png')
-    sprites.target = love.graphics.newImage('sprites/target.png')
+    sprites.target = love.graphics.newImage('sprites/pumpkin.png')
+    sprites.targetHit = love.graphics.newImage('sprites/explodedPumpkin.png')
     sprites.crosshairs = love.graphics.newImage('sprites/crosshairs.png')
+
+    targetSprite = sprites.target
 
     mouseX = 0
     mouseY = 0
@@ -46,6 +51,7 @@ function love.draw()
 
     if gameState == 2 then
         love.graphics.draw(sprites.target, target.x - target.radius, target.y - target.radius)
+        love.graphics.draw(sprites.targetHit, explodedX - target.radius, explodedY - target.radius)
         love.graphics.draw(sprites.crosshairs, mouseX - 20, mouseY - 20)
     end
 
@@ -75,8 +81,11 @@ function love.mousepressed(x, y, button, istouch, presses)
                 score = score + 2
                 timer = timer - 1
             end
-
+            -- explodedTarget()
+            -- targetSprite = sprites.target
             moveTarget()
+            explodedX = x 
+            explodedY = y 
         else
             if score > 0 then
                 score = score - 1
@@ -94,6 +103,10 @@ end
 function distanceBetween(x1, y1, x2, y2)
     return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
 end
+
+-- function explodedTarget()
+--     targetSprite = sprites.targetHit
+-- end
 
 function moveTarget()
     math.randomseed(os.time())
